@@ -1,0 +1,28 @@
+# Dependências
+node_modules/
+
+# Build (gerado por `npm run build`)
+dist/
+*.tsbuildinfo
+
+# Dados em runtime (downloads e artefato gerados por POST /process)
+data/
+
+# Testes
+coverage/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Variáveis de ambiente locais
+.env
+.env.*
+!.env.example
+
+# Editor / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
