@@ -6,14 +6,31 @@ arquitetura, veja o [README](../README.md).
 **Base URL:** `http://localhost:3000` (ou o `HOST`/`PORT` configurado — veja o README).
 
 Toda resposta é JSON (`content-type: application/json; charset=utf-8`), exceto o corpo binário de
-`GET /download`. Toda resposta de erro segue o mesmo formato, descrito no final deste documento.
+`GET /download` e o corpo vazio do redirecionamento de `GET /`. Toda resposta de erro segue o mesmo
+formato, descrito no final deste documento.
 
 ## Índice
 
+- [`GET /`](#get-)
 - [`GET /health`](#get-health)
 - [`POST /process`](#post-process)
 - [`GET /download`](#get-download)
 - [Formato de erro](#formato-de-erro)
+
+---
+
+## `GET /`
+
+Redireciona para `/health`, para a raiz não devolver `404` quando alguém abre `http://localhost:3000`
+no navegador.
+
+**Request:** sem parâmetros, sem corpo.
+
+**Resposta — `302 Found`**
+
+Corpo vazio, com o header `location: /health`.
+
+**Erros possíveis:** nenhum previsto.
 
 ---
 
