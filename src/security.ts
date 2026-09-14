@@ -7,10 +7,14 @@ const ALLOWED_PROTOCOLS = new Set(["http:", "https:"]);
  * Reduces an untrusted string (scraped from HTML) to a filename safe to join onto a local
  * directory: strips any directory component and disallowed characters, preventing path
  * traversal (`../../etc/passwd`) and separator injection.
+ *
+ * Backslashes are normalized to "/" before `path.basename`, so Windows-style paths
+ * (`C:\Windows\System32\evil.dll`) are stripped on every platform: on POSIX `\` is a legal
+ * filename character, not a separator, and would otherwise survive into the output name.
  */
 export function sanitizeFileName(rawName: string, fallback: string): string {
   const cleaned = path
-    .basename(rawName.trim())
+    .basename(rawName.trim().replace(/\\/g, "/"))
     .replace(SAFE_FILENAME_CHARS, "_")
     .replace(/^\.+/, "");
   return cleaned.length > 0 ? cleaned : fallback;
